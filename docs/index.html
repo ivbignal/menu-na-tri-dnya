@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#26382b">
+  <meta name="description" content="Завтрак, обед и ужин на три дня. Рецепты и список продуктов с пересчётом на нужное число человек.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Меню на три дня">
+  <meta property="og:description" content="Три рецепта и список покупок с пересчётом на нужное число человек.">
+  <meta property="og:image" content="https://ivbignal.github.io/menu-na-tri-dnya/assets/menu.webp">
+  <title>Меню на три дня</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <a href="#recipes" class="skip-link">К рецептам</a>
+  <header class="masthead">
+    <div class="shell header-inner">
+      <a class="brand" href="#" aria-label="Домашнее меню, в начало">
+        <span class="brand-icon" aria-hidden="true"></span> Домашнее меню
+      </a>
+      <nav aria-label="Разделы сайта">
+        <a href="#recipes">Рецепты</a>
+        <a href="#shopping">Покупки</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <h1 id="page-title">Меню на <em>три дня</em></h1>
+          <p>Три блюда на каждый день. Выберите, что приготовить, и получите список продуктов.</p>
+          <a class="button hero-button" href="#shopping">К списку покупок</a>
+        </div>
+        <img class="hero-image" src="./assets/menu.webp" width="1024" height="447" fetchpriority="high" alt="">
+      </div>
+    </section>
+
+    <div class="shell">
+      <section class="recipes section" id="recipes" aria-labelledby="recipes-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="recipes-title">Что готовим</h2>
+            <p id="portions-summary" aria-live="polite">На три дня · 6 порций каждого блюда.</p>
+          </div>
+          <fieldset class="people-control" aria-label="Число человек">
+            <legend>На сколько человек</legend>
+            <div class="stepper">
+              <button type="button" id="fewer" aria-label="Уменьшить число человек">−</button>
+              <output id="people" for="fewer more">2</output>
+              <button type="button" id="more" aria-label="Увеличить число человек">+</button>
+            </div>
+          </fieldset>
+        </div>
+        <div class="recipe-grid" id="recipe-grid"></div>
+        <noscript>Включите JavaScript, чтобы открыть рецепты и рассчитать список продуктов.</noscript>
+      </section>
+
+      <section class="shopping section" id="shopping" aria-labelledby="shopping-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="shopping-title">Список покупок</h2>
+            <p>Продукты для выбранных блюд. Отметки сохраняются в этом браузере.</p>
+          </div>
+        </div>
+        <div class="shopping-board">
+          <div class="shopping-controls">
+            <div class="status-block">
+              <strong id="shopping-progress" role="status"></strong>
+              <progress id="progress-bar" value="0" max="1" aria-label="Продукты отмечены"></progress>
+            </div>
+            <label class="check-control filter"><input type="checkbox" id="hide-checked"> Скрыть купленные</label>
+            <div class="shopping-actions">
+              <button class="button primary" id="copy-list" type="button">Копировать оставшееся</button>
+              <button class="text-button" id="reset-checks" type="button">Снять отметки</button>
+            </div>
+            <p id="copy-feedback" class="feedback" role="status" hidden></p>
+          </div>
+          <div id="shopping-groups" class="shopping-groups"></div>
+          <p id="shopping-empty" class="empty" hidden></p>
+        </div>
+      </section>
+      <footer><a href="#recipes">К рецептам</a></footer>
+    </div>
+  </main>
+
+  <dialog id="recipe-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head">
+      <div>
+        <p class="meal" id="dialog-meal"></p>
+        <h2 id="dialog-title"></h2>
+        <p id="dialog-summary"></p>
+      </div>
+      <form method="dialog">
+        <button type="submit" class="close-button" aria-label="Закрыть рецепт" autofocus>×</button>
+      </form>
+    </div>
+    <div class="dialog-body" id="dialog-body"></div>
+  </dialog>
+
+  <dialog id="copy-dialog" aria-labelledby="copy-title">
+    <div class="dialog-head">
+      <h2 id="copy-title">Список для копирования</h2>
+      <form method="dialog">
+        <button type="submit" class="close-button" aria-label="Закрыть список">×</button>
+      </form>
+    </div>
+    <div class="dialog-body">
+      <textarea id="copy-text" aria-labelledby="copy-title" readonly rows="12"></textarea>
+    </div>
+  </dialog>
+</body>
+</html>
